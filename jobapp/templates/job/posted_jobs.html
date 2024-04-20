@@ -1,0 +1,58 @@
+{%extends 'sitepages/base2.html' %}
+{%load static%}
+{%block homepage_content%}
+<style>
+    .card {
+    max-width: 500px; /* Set the maximum width of the card */
+    margin: 0 auto; /* Center the card horizontally */
+    border-radius: 10px; /* Add rounded corners to the card */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    padding: 20px; /* Add padding inside the card */
+}
+
+</style>
+
+
+<!-- Header End -->
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">View Posted Jobs</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">View Posted jobs</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<!-- posted_jobs.html -->
+<!-- posted_jobs.html -->
+{% if jobs %}
+    <div class="card">
+        <h1>Your Posted Jobs</h1>
+        <ul>
+            {% for job in jobs %}
+                <li>
+                    <strong>{{ job.job_title }}</strong>
+                    (<a href="{% url 'view_applicants' job.id %}">View Applicants</a>)
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% else %}
+    <div class="card">
+        <p>You haven't posted any jobs yet.</p>
+    </div>
+{% endif %}
+
+
+
+
+
+
+
+{%endblock%}

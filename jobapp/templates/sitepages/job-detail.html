@@ -1,0 +1,91 @@
+{% extends 'sitepages/base1.html' %}
+{% load static%}
+{% block homepage_content %}
+<style>
+    /* Style for form input fields */
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="file"],
+    form textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+</style>
+
+        <!-- Header End -->
+        <div class="container-xxl py-5 bg-dark page-header mb-5">
+            <div class="container my-5 pt-5 pb-4">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">{{ptitle}}</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb text-uppercase">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Job Detail</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Header End -->
+
+
+        <!-- Job Detail Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="row gy-5 gx-4">
+                    <div class="col-lg-8">
+                        <div class="d-flex align-items-center mb-5">
+                            <img class="flex-shrink-0 img-fluid border rounded" src="{{ job.company_logo.url }}" alt="{{ job.company_logo }}" style="width: 80px; height: 80px;">
+                            <div class="text-start ps-4">
+                                <h3 class="mb-3">{{ job.job_title }}</h3>
+                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ job.location }}</span>
+                                <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ job.job_type }}</span>
+                                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary_range }}</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-5">
+                            <h4 class="mb-3">Job description</h4>
+                            <p>{{ job.job_description }}</p>
+                            <h4 class="mb-3">Responsibility</h4>
+                            <p>{{ job.responsibility }}</p>
+                            
+                            <h4 class="mb-3">Qualifications</h4>
+                            <p>{{ job.qualifications }}</p>
+                        </div>
+
+
+                        <h4 class="mb-4" style="text-align: center;">Apply For The Job</h4>
+                        <div class="">
+                            <form method="post" enctype="multipart/form-data" style="max-width: 500px; margin: auto;">
+                                {% csrf_token %}
+                                <div style="margin-bottom: 15px;">
+                                    {{ form.as_p }}  <!-- Render the form fields -->
+                                </div>
+                                <button class="btn btn-primary w-100" type="submit" style="margin-top: 10px;">Apply Now</button>
+                            </form>
+                        </div>
+                    </div>
+        
+                    <div class="col-lg-4">
+                        <div class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                            <h4 class="mb-4">Job Summary</h4>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: {{ job.posted_date }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: {{ job.job_type }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ job.salary_range }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ job.location }}</p>
+                            <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>DeadLine: {{ job.application_deadline }}</p>
+                        </div>
+                        <div class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">
+                            <h4 class="mb-4">Company Detail</h4>
+                            <p class="m-0">{{ job.company_details }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Job Detail End -->
+
+
+      {%endblock%}

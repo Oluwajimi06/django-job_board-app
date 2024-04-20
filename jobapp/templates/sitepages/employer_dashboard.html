@@ -1,0 +1,120 @@
+{%extends 'sitepages/base2.html' %}
+{%load static%}
+{%block homepage_content%}
+
+ <!-- Carousel Start -->
+ <div class="container-fluid p-0">
+    <div class="owl-carousel header-carousel position-relative">
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="{% static 'img/carousel-1.jpg' %}" alt="">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-10 col-lg-8">
+                            <h1 class="display-3 text-white animated slideInDown mb-4">Hire Top Talents</h1>
+                            <p class="fs-5 fw-medium text-white mb-4 pb-2">Discover skilled professionals to join your team and drive success.</p>
+                            <a href="{% url 'create_job' %}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Post A Job</a>
+                            <a href="{% url 'manage_jobs' %}" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Manage Jobs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="owl-carousel-item position-relative">
+            <img class="img-fluid" src="{% static 'img/carousel-2.jpg' %}" alt="">
+            <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
+                <div class="container">
+                    <div class="row justify-content-start">
+                        <div class="col-10 col-lg-8">
+                            <h1 class="display-3 text-white animated slideInDown mb-4">Grow Your Team with Top Talent</h1>
+                            <p class="fs-5 fw-medium text-white mb-4 pb-2">Find skilled professionals to take your company to the next level.</p>
+                            <a href="{% url 'create_job' %}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Post A Job</a>
+                            <a href="{% url 'manage_jobs' %}" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Manage Jobs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Carousel End -->
+
+
+       
+
+        
+        <!-- About Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="row g-0 about-bg rounded overflow-hidden">
+                            <div class="col-6 text-start">
+                                <img class="img-fluid w-100" src="{%static 'img/about-1.jpg' %}">
+                            </div>
+                            <div class="col-6 text-start">
+                                <img class="img-fluid" src="{%static 'img/about-2.jpg' %}" style="width: 85%; margin-top: 15%;">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid" src="{%static 'img/about-3.jpg' %}" style="width: 85%;">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid w-100" src="{%static 'img/about-4.jpg' %}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <h1 class="mb-4">Employer dashboard</h1>
+                        <p class="mb-4">Unlock access to a pool of top-tier talent ready to drive your company forward. We understand the importance of finding the right fit for your team, and we're committed to helping you recruit the best talent in your industry..</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Discover Tailored Opportunities: Find candidates whose skills and aspirations align perfectly with your company's needs.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Unlock Access to Top-Tier Talent: Gain access to a diverse range of high-caliber candidates, handpicked to meet your company's requirements.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Join Us Today for Success: Take the first step towards building your dream team. Join our platform today and let us help you find the perfect match for your company's success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+<div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Post a Job</h5>
+                        <p class="card-text">Post a new job listing to attract candidates.</p>
+                        <a href="{% url 'create_job' %}" class="btn btn-primary">Post a Job</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Manage Jobs</h5>
+                        <p class="card-text">View and manage your posted job listings.</p>
+                        <a href="{% url 'manage_jobs' %}" class="btn btn-primary">Go to Manage Jobs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">View Posted Jobs</h5>
+                        <p class="card-text">Browse through the jobs you've posted.</p>
+                        <a href="{% url 'posted_jobs' %}" class="btn btn-primary">View Posted Jobs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Profile Settings</h5>
+                        <p class="card-text">Manage your profile settings and account information.</p>
+                        <a href="{% url 'edit_employer_profile' %}" class="btn btn-primary">Go to Profile Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+        {%endblock%}
+

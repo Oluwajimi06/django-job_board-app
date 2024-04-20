@@ -1,0 +1,93 @@
+ <h2>Sign up or Sign in</h2>
+
+                        <!-- Google Sign-in Button -->
+                        <a href="{% provider_login_url 'google' %}" class="btn btn-primary btn-lg">
+                            Proceed
+                        </a>
+
+
+
+{% if messages %}
+        {% for message in messages %}
+
+        <div class="alert alert-{{message.tags}}" role="alert">
+            <b>{{messages}}</b>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import views as auth_views
+from .forms import JobSeekerRegistrationForm, EmployerRegistrationForm
+from django.urls import reverse_lazy
+
+def jobseeker_registration(request):
+    if request.method == 'POST':
+        form = JobSeekerRegistrationForm(request.POST, request.FILES)  # Include request.FILES for file uploads
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = True  # Activate the user
+            user.save()
+            # Authenticate the user after registration
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(request, username=username, password=raw_password)
+            print(user)
+            login(request, user)
+            return redirect('login')  # Redirect to jobseeker dashboard after successful registration
+    else:
+        form = JobSeekerRegistrationForm()
+    return render(request, 'registration/jobseeker_registration.html', {'form': form})
+
+def employer_registration(request):
+    if request.method == 'POST':
+        form = EmployerRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = True  # Activate the user
+            user.save()
+            # Authenticate the user after registration
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(request, username=username, password=raw_password)
+            login(request, user)
+            return redirect('employer_dashboard')  # Redirect to employer dashboard after successful registration
+    else:
+        form = EmployerRegistrationForm()
+    return render(request, 'registration/employer_registration.html', {'form': form})
+
+
+
+
+class CustomLoginView(auth_views.LoginView):
+    template_name = 'registration/login.html'  # Using the same template for both job seekers and employers
+
+    def get_success_url(self):
+        if self.request.user.is_job_seeker:
+            return reverse_lazy('jobseeker_dashboard')
+        elif self.request.user.is_employer:
+            return reverse_lazy('employer_dashboard')
+        else:
+            # Redirect to some default page if the user is neither a job seeker nor an employer
+            return reverse_lazy('home')  
+
+def custom_logout(request):
+    logout(request)
+    # Redirect to some page after logout (e.g., home page)
+    return redirect('/')
+
+# urls.py
+
+from django.urls import path
+from .views import CustomLoginView, custom_logout, jobseeker_registration, employer_registration
+
+urlpatterns = [
+    path('login/', CustomLoginView.as_view(), name='login'),
+    path('logout/',custom_logout, name='logout'),
+    path('register/jobseeker/', jobseeker_registration, name='jobseeker_registration'),
+    path('register/employer/', employer_registration, name='employer_registration'),
+]
+
+https://www.youtube.com/watch?v=z_aWyno595A&list=PLZ4kRpKj_xF5orSOu3e-zmx565ubfBqCR

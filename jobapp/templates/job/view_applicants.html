@@ -1,0 +1,104 @@
+{%extends 'sitepages/base2.html' %}
+{%load static%}
+{%block homepage_content%}
+
+<style>
+    /* Style the headings */
+h1, h2, h3 {
+    color: #333;
+}
+
+/* Style the job details section */
+.job-details {
+    margin-bottom: 20px;
+}
+
+/* Style the list of applicants */
+.applicants-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.applicant-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.applicant-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.applicant-info {
+    margin-bottom: 10px;
+}
+
+.applicant-info p {
+    margin: 5px 0;
+}
+
+.resume-link {
+    color: blue;
+    text-decoration: underline;
+}
+.job-applications{
+    margin: 30px;
+}
+
+</style>
+
+<!-- Header End -->
+<div class="container-xxl py-5 bg-dark page-header mb-5">
+    <div class="container my-5 pt-5 pb-4">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Job Applicants</h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-uppercase">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item text-white active" aria-current="page">Job Applicants</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- view_applicants.html -->
+
+<!-- Job Details -->
+<div class="job-applications">
+    <div class="job-details">
+        <h1>Applicants for "{{ job.job_title }}"</h1>
+
+        <h2>Job Details:</h2>
+        <p>Job Title: {{ job.job_title }}</p>
+        <p>Description: {{ job.job_description }}</p>
+        <!-- Add more job details here -->
+    </div>
+
+    <!-- Applicants -->
+    <div class="applicants-list">
+        {% for application in job_applications %}
+            <div class="applicant-item">
+                <div class="applicant-name">{{ application.name }}</div>
+                <div class="applicant-info">
+                    <p>Email: {{ application.email }}</p>
+                    <p>Portfolio Website: {{ application.portfolio_website }}</p>
+                    <p>Cover Letter:</p>
+                    <p>{{ application.cover_letter }}</p>
+                    <p>Resume: <a class="resume-link" href="{{ application.resume.url }}">Download Resume</a></p>
+                    <p>Applied Date: {{ application.applied_date }}</p>
+                    <!-- Add more applicant details as needed -->
+                </div>
+            </div>
+        {% empty %}
+            <p>No applicants found.</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+{%endblock%}
